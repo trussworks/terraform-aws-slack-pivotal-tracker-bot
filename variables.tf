@@ -13,6 +13,6 @@ variable "slack_token" {
 }
 
 variable "stage_name" {
-  description = "Stage name of deployment, e.g. production"
+  description = "Stage name of API deployment, e.g. production"
   default     = "production"
 }
