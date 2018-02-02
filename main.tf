@@ -3,7 +3,7 @@
  */
 
 resource "aws_simpledb_domain" "sdb_domain" {
-  name = "slack-pivotal-tracker-bot"
+  name = "slack-pivotal-tracker-bot-${var.stage_name}"
 }
 
 /*
@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "lambda_trust_document" {
 }
 
 resource "aws_iam_role" "iam_role_for_lambda" {
-  name               = "iam-role-for-slack-pivotal-tracker-bot"
+  name               = "iam-role-for-slack-pivotal-tracker-bot-${var.stage_name}"
   assume_role_policy = "${data.aws_iam_policy_document.lambda_trust_document.json}"
 }
 
@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "lambda_role_policy_document" {
 }
 
 resource "aws_iam_policy" "lambda_policy" {
-  name   = "iam-policy-for-slack-pivotal-tracker-bot"
+  name   = "iam-policy-for-slack-pivotal-tracker-bot-${var.stage_name}"
   policy = "${data.aws_iam_policy_document.lambda_role_policy_document.json}"
 }
 
@@ -83,7 +83,7 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
 
 module "slack_pivotal_tracker_bot" {
   source      = "modules/aws-lambda-api"
-  name        = "slack-pivotal-tracker-bot"
+  name        = "slack-pivotal-tracker-bot-${var.stage_name}"
   role        = "${aws_iam_role.iam_role_for_lambda.arn}"
   region      = "${var.region}"
   http_method = "POST"
