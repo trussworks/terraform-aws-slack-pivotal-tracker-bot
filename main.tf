@@ -91,7 +91,7 @@ module "slack_pivotal_tracker_bot" {
   runtime     = "python3.6"
   timeout     = "10"
   s3_bucket   = "slack-pivotal-tracker-bot"
-  s3_key      = "releases/slack-pivotal-tracker-bot-latest.zip"
+  s3_key      = "releases/slack-pivotal-tracker-bot-v0.1.0.zip"
 
   lambda_env_var = {
     slack_token   = "${var.slack_token}"
