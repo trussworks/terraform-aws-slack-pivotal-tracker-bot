@@ -32,6 +32,7 @@ data "aws_iam_policy_document" "lambda_role_policy_document" {
       "sdb:GetAttributes",
       "sdb:PutAttributes",
       "sdb:DeleteAttributes",
+      "sdb:Select",
     ]
 
     effect = "Allow"
@@ -91,7 +92,7 @@ module "slack_pivotal_tracker_bot" {
   runtime     = "python3.6"
   timeout     = "10"
   s3_bucket   = "slack-pivotal-tracker-bot"
-  s3_key      = "releases/slack-pivotal-tracker-bot-v0.1.0.zip"
+  s3_key      = "releases/slack-pivotal-tracker-bot-v0.2.0.zip"
 
   lambda_env_var = {
     slack_token   = "${var.slack_token}"
