@@ -19,8 +19,8 @@ data "aws_caller_identity" "current" {}
  */
 
 resource "aws_lambda_function" "lambda" {
-  s3_bucket         = "${var.s3_bucket}"
-  s3_key            = "${var.s3_key}"
+  s3_bucket         = "${data.aws_s3_bucket_object.source_archive.bucket}"
+  s3_key            = "${data.aws_s3_bucket_object.source_archive.key}"
   s3_object_version = "${data.aws_s3_bucket_object.source_archive.version_id}"
   function_name     = "${var.name}"
   role              = "${var.role}"
