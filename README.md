@@ -24,9 +24,9 @@ Please refer to the [application code repo](https://github.com/trussworks/slack-
 Installation is accomplished in four parts:
 
 1. Generate Pivotal Tracker API token
-1. Create a Slack outgoing webhook
+1. Create a Slack slash command
 1. Deploy Terraform module with API tokens
-1. Update Slack webhook with output URL
+1. Update slash command with output URL
 
 ### Generate Pivotal Tracker API token
 
@@ -35,22 +35,23 @@ slack-pivotal-tracker-bot will use this API token to authenticate with Pivotal T
 - While logged in, visit your [Pivotal Tracker profile](https://www.pivotaltracker.com/profile) and scroll down to `API Token`
 - Click `Create New Token`, and save it for step 3
 
-### Create a Slack outgoing webhook
+### Create a Slack slash command
 
-Next, you will create an outgoing webhook in Slack, which tells Slack to listen for your preferred keyphrase and send that message to the provided URL:
+Next, you will create a slash command in Slack, which allows users to enter commands that are sent to a webhook URL:
 
 - Navigate to your server's custom integrations page: `https://YOUR-SERVER.slack.com/apps/manage/custom-integrations`
-- Go to your outgoing webhook application and click on "Add Configuration", and click through the next screen
+- Go to your slash commands application and click on "Add Configuration"
+- Add your preferred command (e.g. `/pivotal`), and click add
 - Scroll down to integration settings and enter these settings:
-  - Channel: Any
-  - Trigger Word(s): Use something unique and easy to remember, e.g. `!pivotal`
+  - Command: Should already be filled
   - URL(s): Leave blank for now
+  - Method: POST
   - Token: This comes pre-filled, but save it for step 3
-  - Descriptive Label: Anything (optional)
   - Customize Name: Name it whatever you'd like!
   - Customize Icon: Up to you
+  - Autocomplete help text: Enter some text that you think will help the user
   - Translate User IDs: Leave checked
-- Save webhook
+- Save integration
 
 ### Deploy Terraform module with API tokens
 
@@ -68,6 +69,6 @@ module "pivotal_tracker_bot" {
 }
 ```
 
-### Update Slack webhook with output URL
+### Update Slack slash command with output URL
 
-If you set up the Terraform module as above, the webhook URL should be output by Terraform after deployment. Head back to the outgoing webhook page as before, but instead of creating a new webook you can edit the webhook you made previously. Paste the output webhook URL into the URL(s) field, hit save, and you're good to go!
+If you set up the Terraform module as above, the webhook URL should be output by Terraform after deployment. Head back to the slash command configuration page as before, but instead of creating a new command you can edit the command you made previously. Paste the webhook URL into the URL(s) field, hit save, and you're good to go!
