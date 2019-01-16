@@ -59,8 +59,8 @@ With your API tokens in hand, deploy the module as shown below:
 
 ```terraform
 module "pivotal_tracker_bot" {
-  source  = "trussworks/pivotal-tracker-bot/slack"
-  version = "0.0.1"
+  source  = "trussworks/slack-pivotal-tracker-bot/aws
+  version = "1.0.1"
 
   pivotal_token = "${var.pivotal_token}"
   slack_token   = "${var.slack_token}"
