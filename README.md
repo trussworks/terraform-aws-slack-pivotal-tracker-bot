@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This project is no longer being maintained.
+
 # slack-pivotal-tracker-bot AWS module
 
 This is the Terraform module for deploying slack-pivotal-tracker-bot to AWS Lambda
